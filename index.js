@@ -10,6 +10,10 @@ const router = express.Router();
 const environment = process.env.NODE_ENV; // development
 const stage = require('./config')[environment];
 
+const routes = require('./routes/index.js');
+
+app.use('/api/v1', routes(router));
+
 app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({
@@ -29,5 +33,8 @@ app.use('/api/v1', (req, res, next) => {
 app.listen(`${stage.port}`, () => {
   console.log(`Server listening at localhost:${stage.port}`);
 });
+
+
+
 
 module.exports = app;
